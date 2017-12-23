@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'AppBundle::head.html.twig' with { css: block('css') } %}
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        {% include 'AppBundle::menu.html.twig' %}
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+        <!-- /page content -->
+
+        <footer>
+            <div class="pull-right">
+                Created by <a href="">A.Terlan</a>
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+    </div>
+</div>
+
+{% include 'AppBundle::foot.html.twig' with { scripts: block('scripts') } %}
+
+</body>
+</html>

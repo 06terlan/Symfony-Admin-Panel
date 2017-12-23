@@ -1,0 +1,55 @@
+{% extends "AppBundle::master.html.twig" %}
+
+{% block content %}
+{% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('admin_groups_insert') }}" class="btn btn-round btn-success btn_add_standart"><i class="fa fa-plus"></i> Add</a>
+{% endif %}
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Groups</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Group Name</th>
+                            <th>Group Key</th>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <th>Action</th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                <tbody>
+                    {% for group in groups %}
+                        <tr>
+                            <td>{{ startCount + loop.index }}</td>
+                            <td>{{ group.getGroupName() }}</td>
+                            <td>{{ group.getGroupKey() }}</td>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <td>
+                                    <a href="{{ path('admin_groups_update', {'userGroup': group.id}) }}" data-toggle="tooltip" data-original-title="Edit" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                                    <a href="{{ path('admin_groups_delete', {'userGroup': group.id}) }}" data-toggle="tooltip" data-original-title="Delete" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="navigation text-center">
+        {{ knp_pagination_render(groups) }}
+    </div>
+</div>
+
+{% endblock %}

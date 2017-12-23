@@ -1,0 +1,114 @@
+{% extends "AppBundle::master.html.twig" %}
+
+{% block content %}
+    {% include 'AppBundle::error.html.twig' %}
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Profile</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <br>
+                    {{ form_start(formInfo) }}
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">{{ form_label(formInfo.image) }}</label>
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="thumbnail" style="height: 150px;width: 150px;">
+                                    <div class="image view view-first" style="height: 100%;">
+                                        <img style="width: 140px;height: 140px;display: block;" src="{{ asset(app.user.photo) }}" alt="profil photo">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3" style="padding-top: 130px;">
+                                {{ form_widget(formInfo.image) }}
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">{{ form_label(formInfo.name) }}
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                {{ form_widget(formInfo.name) }}
+                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">{{ form_label(formInfo.surname) }}
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                {{ form_widget(formInfo.surname) }}
+                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">{{ form_label(formInfo.login) }}
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                {{ form_widget(formInfo.login) }}
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">{{ form_label(formInfo.email) }}</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                {{ form_widget(formInfo.email) }}
+                                <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                {{ form_widget(formInfo.save) }}
+                            </div>
+                        </div>
+                    {{ form_end(formInfo) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Password</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br>
+                {{ form_start(formPass) }}
+                    <div class="item form-group">
+                        <label for="old_password" class="control-label col-md-3">{{ form_label(formPass.old_password) }} <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_widget(formPass.old_password) }}
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label for="password" class="control-label col-md-3">{{ form_label(formPass.password) }} <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_widget(formPass.password) }}
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label for="re_password2" class="control-label col-md-3 col-sm-3 col-xs-12">{{ form_label(formPass.re_password) }} <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            {{ form_widget(formPass.re_password) }}
+                        </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            {{ form_widget(formPass.save) }}
+                        </div>
+                    </div>
+                {{ form_end(formPass) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{{ asset('bundles/AppBundle/assets/vendors/validator/validator.js') }}"></script>
+{% endblock %}

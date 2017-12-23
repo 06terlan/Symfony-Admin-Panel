@@ -1,0 +1,51 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+security:
+
+    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    providers:
+        admin_provider:
+            entity:
+                class: AppBundle:User
+                property: username
+
+    encoders:
+        AppBundle\Entity\User:
+            algorithm: bcrypt
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            anonymous: ~
+            # activate different ways to authenticate
+
+            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+            http_basic: ~
+
+            # https://symfony.com/doc/current/security/form_login_setup.html
+            form_login:
+                login_path: /admin/login
+                check_path: /admin/login
+                default_target_path: /admin
+                csrf_token_generator: security.csrf.token_manager
+                csrf_parameter: _login_csrf_token
+                csrf_token_id: authenticate
+            logout:
+                path: /admin/logout
+                target: /admin/login
+
+            provider: admin_provider
+
+    #role_hierarchy:
+    #        ROLE_ADMIN: [ROLE_USER, FEATURE_ALPHA, ROLE_ALLOWED_TO_SWITCH]
+
+    access_control:
+        # require ROLE_ADMIN for /admin*
+        - { path: ^/admin/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/\w+/(insert|update|delete), roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: IS_AUTHENTICATED_FULLY }
+

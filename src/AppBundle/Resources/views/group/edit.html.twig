@@ -1,0 +1,50 @@
+{% extends "AppBundle::master.html.twig" %}
+
+{% block content %}
+    {% include 'AppBundle::error.html.twig' %}
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Groups</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <br>
+                    {{ form_start(formGroup, { 'action': app.request.uri, 'attr': {'class': 'form-horizontal form-label-left', 'novalidate': ''} }) }}
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">{{ form_label(formGroup.groupName, 'Group name') }}
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                {{ form_widget(formGroup.groupName, {'attr' : {'required':'','data-validate-length-range' : '1,50','class' : 'form-control has-feedback-left','placeholder' : 'Group name'}}) }}
+                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">{{ form_label(formGroup.groupKey, 'Group Key') }}
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                {{ form_widget(formGroup.groupKey, {'attr' : {'required':'','data-validate-length-range' : '1,20','class' : 'form-control has-feedback-left','placeholder' : 'Group Key'}}) }}
+                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                {{ form_widget(formGroup.save, {'label': 'Save', 'attr': {'class': 'btn btn-success'}}) }}
+                                <a class="btn btn-default" href="{{ path('admin_groups') }}" type="reset">Cancel</a>
+                            </div>
+                        </div>
+                    {{ form_end(formGroup) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{{ asset('bundles/AppBundle/assets/vendors/validator/validator.js') }}"></script>
+{% endblock %}
